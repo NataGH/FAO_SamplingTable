@@ -1,0 +1,309 @@
+\documentclass[11pt]{article}
+%\documentclass[11pt]{report}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx,subfigure} %perchË mi d‡ prob nella compilazione
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage[applemac]{inputenc}
+\usepackage[english]{babel}
+\usepackage{cancel}
+\usepackage{dsfont}
+\usepackage{hyperref}
+
+\def\red{\color{red}}
+\def\black{\color{black}}
+\def\blue{\color{blue}}
+\def\green{\color{green}}
+\def\gray{\color{gray}}
+\def\cyan{\color{cyan}}
+\def\magenta{\color{magenta}}
+\def\yellow{\color{yellow}}
+\def\violet{\color{violet}}
+\def\yellow{\color{yellow}}
+
+%\def\blue{\color{blue!80!cyan}}
+
+% \def\blue{\color{blue}}
+ \def\cre{\color{red}}
+ \def\cbl{\color{black}}
+\definecolor{eublue}{rgb}{0.1,0.1,0.5} % Definition of blue color
+\definecolor{eumagenta}{rgb}{1,0,0.9} % Definition of blue color
+
+
+\setlength{\textwidth}{16.5cm} \setlength{\textheight}{24cm}
+\setlength{\oddsidemargin}{-0cm}
+\setlength{\evensidemargin}{-0.5cm} \setlength{\topmargin}{-2cm}
+\renewcommand{\baselinestretch}{1.3}
+\newcommand{\ud}{\mathrm{d}}
+
+
+%%% stuff for theorem-like environments
+\newtheorem{definition}{Deéfinition}
+\newtheorem{theorem}{Theéoreèm}
+\newtheorem{lemma}{Lemme}
+\newtheorem{remark}{Remarque}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollaire}
+\newcommand{\bpf}{{\bf Preuve }}
+\newcommand{\epf}{\begin{flushright}$\blacksquare$\end{flushright}}
+
+
+\newcommand{\BE}{\begin{equation}}
+\newcommand{\BEno}{\begin{equation*}}
+\newcommand{\EE}{\end{equation}}
+\newcommand{\EEno}{\end{equation*}}
+\newcommand{\mtx}[1]{\left[\begin{matrix}#1\end{matrix}\right]}
+
+%%% probability symbolism
+%\newcommand{\operatorname}{\mathop}
+\newcommand{\logit}[1]{\operatorname{logit}\left(#1\right)}
+\newcommand{\prob}[1]{\operatorname{\mathbb P}(#1)}
+\newcommand{\probstar}[1]{\operatorname{P}^*(#1)}
+\newcommand{\expect}[1]{\operatorname{\mathbb E}\left[#1\right]}
+\newcommand{\expectsub}[2]{\expectation_{#1}\left(#2\right)}
+\newcommand{\variance}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\covariance}[2]{\operatorname{Cov}\left(#1,#2\right)}
+\newcommand{\correlation}[2]{\operatorname{Corr}\left(#1,#2\right)}
+\newcommand{\normaldensity}[3] {\frac1{\sqrt{2\pi#3}}\exp\left[-\frac1{2#3} (#1-#2)^2\right]}
+
+\newcommand{\trace}[1]{\operatorname{trace}\left(#1\right)}
+
+\newcommand{\iid}{\stackrel{\mathrm{iid}}{\sim}}
+\newcommand{\app}{\stackrel{\mathrm{app}}{=}}
+%%% different fields in mathematics
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\posreals}{\reals_+}
+\newcommand{\realvectors}[1]{\reals^{#1}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\integers}{\mathbb{Z}}
+
+\newcommand{\mT}{\mathcal{T}}
+\newcommand{\mF}{\mathcal{F}}
+\newcommand{\mS}{\mathcal{S}}
+\newcommand{\mN}{\mathcal{N}}
+\newcommand{\mP}{\mathcal{P}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mU}{\mathcal{U}}
+\newcommand{\mR}{\mathcal{R}}
+
+\newcommand{\bzero}{\text{\mathversion{bold}$0$\mathversion{normal}}}
+\newcommand{\buno}{\text{\mathversion{bold}$1$\mathversion{normal}}}
+%%% and greek
+\newcommand{\bSigma}{\text{\mathversion{bold}$\Sigma$\mathversion{normal}}}
+\newcommand{\bmu}{\text{\mathversion{bold}$\mu$\mathversion{normal}}}
+\newcommand{\bnu}{\text{\mathversion{bold}$\nu$\mathversion{normal}}}
+\newcommand{\btheta}{\text{\mathversion{bold}$\theta$\mathversion{normal}}}
+\newcommand{\brho}{\text{\mathversion{bold}$\rho$\mathversion{normal}}}
+\newcommand{\balpha}{\text{\mathversion{bold}$\alpha$\mathversion{normal}}}
+\newcommand{\bbeta}{\text{\mathversion{bold}$\beta$\mathversion{normal}}}
+\newcommand{\bGamma}{\text{\mathversion{bold}$\Gamma$\mathversion{normal}}}
+\newcommand{\bLambda}{\text{\mathversion{bold}$\Lambda$\mathversion{normal}}}
+\newcommand{\blambda}{\text{\mathversion{bold}$\lambda$\mathversion{normal}}}
+\newcommand{\bdelta}{\text{\mathversion{bold}$\delta$\mathversion{normal}}}
+
+\newcommand{\veps}{\varepsilon}
+\newcommand{\vphi}{\varphi}
+\newcommand{\bra}[1]{\{#1\}}
+\newcommand{\indic}{\mathds{1}}
+
+\begin{document}
+\noindent
+\begin{center}
+\includegraphics[width=2.5cm]{logo}\\
+\vspace{1cm}
+{\huge{\bf{Balancing of Food Balance Sheets (FBSs)}}}   \\
+\bigskip
+{\large {\bf Marco Garieri, Natalia Golini, Luca Pozzi}} \\
+{\large {\bf [name.cognome]@fao.org}} \\
+{\large {\today}} \\
+\end{center}
+
+
+
+
+\section*{Simulation on sample table}
+
+Testiamo l'algoritmo proposto (quindi dobbiamo modificare quello che abbiamo scritto nel paper) partendo da un FBS verosimile (sulla falsa riga di alcune righe di Italia 2010)
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tabular}{ |l|c|c|c|c|c|c|c|}
+    \hline
+    Item & Food & Feed & Losses & Seed & IndUse & StVar & Tot\\ \hline \hline    
+    Cereals & 9230 & 12950 & 130 & 630 & 860 & -350 & 24150  \\ \hline
+    Starchy Roots &	2300 &	190 & 135 &	155 &	0 &	-195  &	2975 \\ \hline
+    Oilcrops &	180 &	310 &	26 &	24 &	5169 &	258 &	5451 \\ \hline
+    Vegetable Oils & 1530 &	12 &	402 & 0 &	3 &	65 & 1882  \\ \hline
+    Vegetables & 12500 & 895 & 0 & 16 & 0 & 0 & 13411 \\ \hline
+    Fruits & 8990 & 0 & 4 & 0 & 7000 & 120 & 15874 \\ \hline
+    Meat & 5218 & 0 & 0 & 0 & 20 & 0 & 5239 \\ \hline 
+     Tot Col & 39948 & 14357 & 697 & 825 & 13052 & -102 & 68981 \\ \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5cm}
+
+
+\noindent where 
+
+\begin{equation}
+\nonumber Tot=Food+Feed+Losses+Seed+IndUse-StVar
+\end{equation}
+
+
+\noindent Ora supponiamo di non conoscere i valori "veri" all'interno di ogni cella, ma solo quelli relativi ai totali di riga.\\ 
+
+L'obiettivo Ë quello di imputare i valori mancanti usando le informazioni che lo staff FAO sar‡ in grado di fornire. Queste informazioni saranno date in termini di valori attesi per ogni cella e il grado di incertezza su tale valore verr‡ espresso in termini di scostamento percentuale dal valore atteso.\\
+
+Per valutare il comportamento dell'algoritmo proposto sono stati considerati 3 possibili scenari che rispecchiano il grado di accuratezza delle prior che lo staff FAO metter‡ a disposizione.\\
+
+I valori attesi che fornir‡ lo staff FAO dovranno essere tali che per ogni riga (item) il $Tot=Food+Feed+Losses+Seed+IndUse-StVar$ sia uguale o molto prossimo a $Tot2=Prodction+Imports-Exports$ (termini consolidati). La definizione di "molto prossimo" Ë ancora oggetto di studio.
+
+
+
+\noindent \textcolor{red}{per poter convergere i totali di riga della tabella "muTab" devo essere molto vicini ai totali di riga "veri". Quindi potremmo pensare ad un primo controllo in cui chiediamo all'algoritmo di controllare che questa assunzione sia valida prima di iniziare il running. Questo mi sembra ragionevole nella realt‡. La FAO non puÚ darci dei valori di riga (expected values) la cui somma si discosta troppo dalla somma dei valori veri. La definizione di "molto vicini" richiede ancora qualche simulazione.}
+
+\noindent In the following table are shown the expected values hypothesized for each cell. Note how they do not differ greatly from the true value taken by each individual cell. 
+
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tabular}{ |l|c|c|c|c|c|c|c|c|}
+    \hline
+    Expected Value & Food & Feed & Losses & Seed & IndUse & StVar & Tot & Tot2\\ \hline \hline    
+    Cereals & 9210 & 12940 & 122 & 624 & 833 & -344 & 24073 & 24150 \\ \hline
+    Starchy Roots &	2274 &	191 & 129 &	150 &	0 &	-175  &	2919 & 2975 \\ \hline
+    Oilcrops &	177 &	310 &	26 &	24 &	5169 &	277 &	5429 & 5451\\ \hline
+    Vegetable Oils & 1527 &	12 &	402 & 0 &	4 &	65 & 1880 & 1882  \\ \hline
+    Vegetables & 12430 & 930 & 0 & 12 & 0 & 0 & 13372 & 13411 \\ \hline
+    Fruits & 9000 & 0 & 6 & 0 & 6965 & 90 & 15881 & 15874 \\ \hline
+    Meat & 5218 & 0 & 0 & 0 & 16 & 0 & 5234 & 5238 \\ \hline \hline 
+    Tot Col & 39836 & 14383 & 685 & 810 & 12987 & -87 & 68788 & 68981 \\ \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5cm}
+
+
+
+
+\subsection*{Scenario 1}
+
+In questo scenario le prior hanno dei bounds molto stretti. Nella tabella vengono riportati gli scostamenti dal valore atteso per ogni cella sia in termini percentuali che assoluti, ad eccezione fatta per i totali di colonna.
+
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tabular}{ |l|r|r|r|r|r|r|}
+    \hline
+    $\pm \%$ (absolute) & Food & Feed & Losses & Seed & IndUse & StVar \\ \hline \hline    
+    Cereals & 2 (184) & 5 (647) & 10 (12) & 2 (12) & 2 (17) & 10 (-34) \\ \hline
+    Starchy Roots &	2 (45) & 5 (10) & 10 (13) & 2 (3) & 0 & 10 (-18) \\ \hline
+    Oilcrops &	2 (4) & 5 (16) &	10 (3) & 10 (2) & 2 (103) & 10 (28)\\ \hline
+    Vegetable Oils & 2 (31) & 5 (1) & 10 (40) & 0 & 10 (0) & 10 (7) \\ \hline
+    Vegetables & 2 (249) & 2 (19) & 0 & 10 (1) & 0 & 0 \\ \hline
+    Fruits & 2 (180) & 0 & 10 (1) & 0 & 2 (139) & 10 (9) \\ \hline
+    Meat & 2 (104) & 0 & 0 & 0 & 10 (2) & 0 \\ \hline \hline
+    Tot Col & 20 (7967) & 20 (2877) & 20 (137) & 20 (162) & 20 (2597) & 20 (-17) \\ \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5cm}
+
+		
+
+
+\subsection*{Scenario 2}
+
+In questo scenario sono state utilizzate delle prior con bounds con ampiezza quasi doppia rispetto a quelli utilizzati nello Scenario 1. 
+
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tabular}{ |l|r|r|r|r|r|r|}
+    \hline
+    $\pm \%$ (absolute) & Food & Feed & Losses & Seed & IndUse & StVar \\ \hline \hline    
+    Cereals & 5 (461) & 10 (1294) & 20 (24) & 5 (31) & 2 (17) & 20 (-69) \\ \hline
+    Starchy Roots &	5 (114) & 10 (19) & 20 (26) & 5 (8) & 0 & 20 (-35) \\ \hline
+    Oilcrops &	5 (9) & 10 (31) &	20 (5) & 20 (5) & 2 (103) & 20 (55)\\ \hline
+    Vegetable Oils & 5 (76) & 10 (1) & 20 (80) & 0 & 20 (1) & 20 (13) \\ \hline
+    Vegetables & 5 (622) & 5 (47) & 0 & 20 (2) & 0 & 0 \\ \hline
+    Fruits & 5 (450) & 0 & 20 (1) & 0 & 2 (139) & 20 (18) \\ \hline
+    Meat & 5 (261) & 0 & 0 & 0 & 20 (3) & 0 \\ \hline  \hline
+    Tot Col & 20 (7967) & 20 (2877) & 20 (137) & 20 (162) & 20 (2597) & 20 (-17) \\ \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5cm}
+
+
+
+
+\subsection*{Scenario 3}
+
+In this scenario, the prior limits have much more extensive than those of the Scenario 2. (TABELLA CON VALORI DA MODIFICARE)
+
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tabular}{ |l|r|r|r|r|r|r|}
+    \hline
+    $\pm \%$ (absolute) & Food & Feed & Losses & Seed & IndUse & StVar \\ \hline \hline    
+    Cereals & 10 (921) & 10 (1294) & 30 (37) & 5 (31) & 5 (42) & 30 (-103) \\ \hline
+    Starchy Roots &	10 (227) & 10 (19) & 30 (39) & 5 (8) & 0 & 30 (-58) \\ \hline
+    Oilcrops &	10 (18) & 10 (31) &	30 (8) & 30 (7) & 5 (258) & 30 (83)\\ \hline
+    Vegetable Oils & 10 (153) & 10 (1) & 30 (121) & 0 & 30 (1) & 30 (20) \\ \hline
+    Vegetables & 10 (1243) & 5 (47) & 0 & 30 (4) & 0 & 0 \\ \hline
+    Fruits & 10 (900) & 0 & 30 (2) & 0 & 5 (348) & 30 (27) \\ \hline
+    Meat & 10 (522) & 0 & 0 & 0 & 30 (5) & 0 \\ \hline  \hline
+    Tot Col & 20 (7967) & 20 (2877) & 20 (137) & 20 (162) & 20 (2597) & 20 (-17) \\ \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5cm}
+
+
+
+\section*{Results}
+
+Nella tabella che segue vengono riportati i tempi di esecuzione dell'algoritmo per i 3 Scenari definiti nella precedente section. (SONO DA RICALCOLARE DOPO AVER INTEGRATO IL CODICE DI LUCA A QUELLO DEL 131108.)
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tabular}{ |c|r|r|r|}
+    \hline
+    Scenario & user & system & elapsed \\ \hline \hline
+    1 & 84.88  &  2.80 & 127.20 \\ \hline
+    2 & 33.49 &  1.62 & 1239.19 \\ \hline
+    3 &  19.55 & 1.01 & 26.44 \\ \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5cm}    
+
+
+Per sintetizzare le diverse soluzioni generate dall'algoritmo di Ë pensato in prima battuta di calcolare una distribuzione di frequenza per le tabelle simulate e considerare come sintesi quella (o quelle) che veniva campionata pi˘ molte (moda della distribuzione). Purtroppo un successivo controllo sulle tabelle campionate ha mostrata la non presenza di una moda nella distribuzione: ogni tabella campionata Ë unica, non Ë uguale a nessuna delle tabelle campionate. Quindi per 100 iterazioni abbiamo 100 tabelle simulate tutte diverse tra loro. E questo vale per tutti e 3 gli scenari anche con un numero di iterazioni pari a 1000 e 10000. \\
+
+Per valutare la performance dell'algoritmo proposto Ë stato calcolato il RMSE (METTEREI IL RELATIVE RMSE, ALMENO POSSIAMO CONFORNTARLO) tra i valori "veri" e quelli campionati per ciascuna tabella. Ovviamente questo indice di performance puÚ essere calcolato solo nel caso in cui si conoscano i valori veri delle celle, e quindi solo durante uno studio di simulazione. 
+
+
+
+
+\subsection*{Appunti}
+
+\begin{itemize}
+\item per velocizzare l'algoritmo si potrebbe pensare di ordinare le colonne della tabella "muTab" in ordine crescente di sd. Rimane esclusa da questo ordinamento "varStock" che resta ad occupare l'ultima colonna della tabella.(FATTO DA LUCA E DA INTEGRARE CON L'ALGORIMO DEL 131108.)
+\item lascerei la sdev sempre pari a 100 per questi primi risultati. Una sdev cosÏ alta sostanzialmente obbliga l'algoritmo a campionare da un'uniforme discreta limitata dagli upper e lower bound che calcoliamo. In questo modo si considera un grado di incertezza alto per il valore medio che ci fornisce lo staff FAO per ogni cella. CiÚ garantisce all'algoritmo di poter campionare il "vero" valore della cella anche se quest'ultimo Ë molto distante al valore atteso che Ë stato fornito. Praticamente in questo modo si campiona anche sulle code della normale troncata.
+\end{itemize}
+
+
+\subsection*{Cose da fare}
+
+\begin{itemize}
+\item Individuare la tabella (se esiste o esistono) che viene pi˘ spesso campionata. Potrebbe rappresentare un indice di sintesi per le diverse tabelle campionate e quindi una soluzione unica da offrire a FAO. (FATTO E  NON SONO STATE TROVATE DELLE TABELLE UGUALE NEANCHE PER 10000 ITERAZIONI, IL CHE FA SUPPORRE CHE NON LE TROVEREMO MAI, NEANCHE AUMENTANDO IL NUMERO DI ITERAZIONI. BISOGNEREBBE PENSARE AD UN MODO, CHIEDENDO ANCHE DIRETTAMENTE AD ADAM E JOSEPH,PER SINTETIZZARE I RISULTATI CHE ABBIAMO TROVATO. IN QUESTO STUDIO DI SIMULAZIONE POSSIAMO CALCOLARE I IL RMSE TRA I VALORI VERI E QUELLI CAMPIONATI PER OGNI TABELLA E QUINDI FORNIRE COME SINTESI LA TABELLA (O LE PRIMA 10 TABELLE) CHE HA IL RMSE PIU' BASSO. QUANDO PERÚ SIMULEREMO SENZA CONOSCERE I DATI VERI DOVREMO INVENTARCI ALTRO...)
+\item Calcolare un indice di bont‡ di adattamento quale ad esempio il RMSE tra i valori "veri" e quelli campionati.(FATTO DA LUCA)
+\item Giocare con la sd del totale di colonne. Tempo di esecuzione? Bont‡ di campionamento? (... ci sto pensando ...) (FATTO. AL MOMENTO IN TUTTI E TRE GLI SCENARI TUTTI I TOTALI DI COLONNA POSSONO VARIARE PER UN VALORE PARI AL $\pm 20\%$ DEL LORO VALORE ATTESO, DOVE QUEST'ULTIMO Ë CALCOLATO COME SOMMA DEI VALORI ATTESI PER CIASCUNA COLONNA. IN REALTA' NEL CODICE HO FORZATO L'UPPER BOUND DELLA TOT DI VARSTOCK AD ESSERE PARI A ZERO E L'ALGORITMO NON FATICA MOLTO AD ACCETTARE)
+\end{itemize}
+
+
+
+
+
+\end{document}
