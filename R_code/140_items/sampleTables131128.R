@@ -61,13 +61,6 @@ aa<-order(rrmse)[1]
 aa
 sqrt((sum(((tab[[1]][,,aa]-Scenario)/(Scenario+0.0000001))^2))/length(tab[[1]][,,aa]))
 
---------------------------------------------------------------------------------------------------------------------
-
-## SBAGLIATE
-#rmse <- sqrt(sum(unlist(lapply(tab[[1]],function(t)sum((t-Scenario)^2)))))
-#rmse <- sqrt(unlist(lapply(tab[[1]],function(t)sum((t-Scenario)^2))))
-
-#rrmse <- sqrt(sum(unlist(lapply(tab[[1]],function(t)sum(((t-Scenario)^2)/abs(Scenario))))))
 
 den <- 1:3
 reject <- rmse <- time <- rep(NA,length(den))
@@ -83,3 +76,9 @@ for(i in 1:length(den)){
 plot(1/den,time,type="b",col="blue",main="Time vs. Strenght of the Constraint",xlab="narrowness")
 points(1/den,time,col="red",pch=16)
 
+
+
+#### Let's use the RRMSE as a loss function
+
+
+system.time(tab <- sampleTables(n0,muTab,bounds,controlCol=controlCol1))
