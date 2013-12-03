@@ -13,12 +13,14 @@ Starchy Roots,69,158,42,0,211,2459,-17
 Cassava,2,0,0,0,3,0,0
 Potatoes,53,158,42,0,208,2445,-17
 Sweet Potatoes,9,0,0,0,0,14,0
+Yams,0,0,0,0,0,0,0
 Roots Other,5,0,0,0,0,0,0
 Sugarcrops,24,0,53,4935,0,0,0
 Sugar Beet,24,0,53,4935,0,0,0
 Sugar & Sweeteners,0,0,0,18,206,1855,595
+Sugar  Non-Centrifugal ,0,0,0,0,0,0,0
 Sugar,0,0,0,18,57,1736,588
-"Sweeteners, Other",0,0,0,0,149,99,7
+Sweeteners Other,0,0,0,0,149,99,7
 Honey,0,0,0,0,0,21,0
 Pulses,226,21,19,0,0,347,-5
 Beans,0,4,5,0,0,109,0
@@ -33,6 +35,7 @@ Rape and Mustardseed,0,0,2,21,5,3,3
 Cottonseed,19,0,0,169,0,0,0
 Coconuts - Incl Copra,0,0,0,0,0,24,0
 Sesameseed,0,0,1,6,0,0,0
+Palmkernels ,0,0,0,0,0,0,0
 Olives,0,0,4,3522,0,153,0
 Oilcrops Other,0,0,0,166,0,0,9
 Vegetable Oils,368,0,0,5,956,1706,90
@@ -46,6 +49,7 @@ Palm Oil,0,0,0,0,387,42,0
 Coconut Oil,0,0,0,0,26,39,0
 Sesameseed Oil,0,0,0,0,0,3,0
 Olive Oil,0,0,0,0,48,870,88
+Ricebran Oil ,0,0,0,0,0,0,0
 Maize Germ Oil,0,0,0,0,0,78,0
 Oilcrops Oil Other,0,0,0,5,90,11,2
 Vegetables,747,13,1412,0,0,9736,1
@@ -69,6 +73,8 @@ Coffee,0,0,0,0,0,355,0
 Cocoa Beans,0,0,0,14,0,90,-5
 Tea,0,0,0,0,0,8,2
 Spices,0,0,0,0,0,6,-1
+Pimento,0,0,0,0,0,0,0
+Cloves,0,0,0,0,0,0,0
 Pepper,0,0,0,0,0,3,0
 Spices Other,0,0,0,0,0,3,-1
 Alcoholic Beverages,0,0,21,761,245,4478,70
@@ -101,6 +107,8 @@ Crustaceans,0,0,0,0,0,152,0
 Cephalopods,0,0,0,0,0,227,0
 Molluscs Other,0,0,0,0,0,215,0
 Aquatic Products Other,0,0,0,0,3,21,0
+Meat & Aquatic Mammals ,0,0,0,0,0,0,0
 Aquatic Animals,0,0,0,0,1,21,0
 Aquatic Plants,0,0,0,0,2,0,0
+Miscellaneous ,0,0,0,0,0,0,0
 Tot col,41110,2354,5795,46055,5102,130528,3151
