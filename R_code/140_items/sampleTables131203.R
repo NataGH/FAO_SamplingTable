@@ -24,44 +24,50 @@ controlCol1 <- rbind(lowCol,uppCol)
 controlCol1[,ncol(controlCol1)]<- controlCol1[,ncol(controlCol1)]*c(5,1/5)
 
 
-	
-#tab <- sampleTables(n0,muTab,bounds,sdev=5)
 
 system.time(tab <- sampleTables(n0,muTab,bounds,controlCol=controlCol1))
 tab
 
 
-# now let's say, for instance, the 3rd, 56th and 101st rows of the previous best table were OK
+unlist(lapply(tab@tables,function(x)attr(x,"mult")))
+length(tab@tables)
+
+
+
+### now let's say, for instance, the 3rd, 56th and 101st rows of the previous best table were OK
 system.time(tab2 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,fixed=c(3,56,101),fixedRows=tab@bestTab[c(3,56,101),]))
-tab2
 
 tab@bestTab[c(3,56,101),]
 tab2@bestTab[c(3,56,101),]
 
-#as.matrix(lapply(tab$tabs, length))
 
-unlist(lapply(tab@tables,function(x)attr(x,"mult")))
-length(tab@tables)
+### now let's fix the ()-th element of the table
+system.time(tab2 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,fixed=c(3,56,101),fixedRows=tab@bestTab[c(3,56,101),]))
 
+tab@bestTab[c(3,56,101),]
+tab2@bestTab[c(3,56,101),]
+
+
+
+
+### now let's use the MSE to pick the best table
 Scenario <- read.csv("Scenario_140.csv",sep=";",nrows=nrow(muTab))
 rownames(Scenario) <- make.unique(as.character(Scenario[,1]))
 Scenario <- Scenario[,-c(1,8:9)]
 
-rmse <- unlist(lapply(tab@tables,function(t)sqrt((mean((t-Scenario)^2)))))
-rmse
-rrmse <- unlist(lapply(tab@tables,function(t)sqrt((mean(((t-Scenario)/(Scenario+2*sqrt(.Machine$double.eps)))^2)))))
-rrmse
-
-order(rrmse)
-min(rrmse)
+system.time(tab3 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,objFun=rmseObj(Scenario)))
+# system.time(tab3 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,objFun=rrmseObj(Scenario))
 
 
-# check
-aa<-order(rrmse)[1]
-aa
-sqrt((sum(((tab[[1]][,,aa]-Scenario)/(Scenario+0.0000001))^2))/length(tab[[1]][,,aa]))
+
+### Now let's consider the case one row is all zero
+muTab1 <- muTab
+muTab1[4,] <- muTab1[4,]*0
+system.time(tab4 <- sampleTables(n0,muTab1,bounds,controlCol=controlCol1))
 
 
+
+### do we still care about this?
 den <- 1:3
 reject <- rmse <- time <- rep(NA,length(den))
 
@@ -78,7 +84,3 @@ points(1/den,time,col="red",pch=16)
 
 
 
-#### Let's use the RRMSE as a loss function
-
-
-system.time(tab <- sampleTables(n0,muTab,bounds,controlCol=controlCol1))

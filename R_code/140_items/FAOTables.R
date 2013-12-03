@@ -35,6 +35,15 @@ sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,cont
 		argz <- lapply(2:length(call),function(i)eval(call[[i]]))
 		names(argz) <- names(call)[2:length(names(call))]
 		}else argz <- list()
+	
+	### zero rows	
+	indZero <- apply(muTab,1,function(x)all(x==0))|(n0==0)
+	if(any(indZero)){
+		muTab <- muTab[-which(indZero),]
+		n0 <- n0[-which(indZero)]
+		if(!is.null(controlRow))controlRow <- controlRow[-which(indZero),]
+		bounds <- bounds[-which(indZero),,]
+		}
 
 	nr<-nrow(muTab)
 	nc<-ncol(muTab)
@@ -59,7 +68,6 @@ sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,cont
 		
 		sim <- do.call(rbind,lapply(1:nr,function(i){
 			
-			### NB it's NOT memory efficient: ci giuochiamo poi lo cambio
 			if(i%in%fixed) return(fixedRows[fixed==i,])
 			
 			rrow <- rep(NA,nc)
@@ -129,9 +137,27 @@ sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,cont
       okTab <- okTab[1:uniqueT]
       bestTab <- okTab[[which.max(unlist(lapply(okTab,objFun)))]]
       
+      bestTab <- do.call(rbind,lapply(1:length(indZero),function(i){
+      	if(indZero[i])return(rep(0,nc))
+      	return(bestTab[i-sum(indZero[1:i]),])
+      	}))
 
       return(new("FAOtab",bestTab=bestTab,tables=okTab,iters=iter,objective=objFun(bestTab),call=call,args=argz))
       
       }
 
+
+#### MSE objective function
+
+rmseObj <- function(obsTable){
+	function(tab){
+		sqrt((mean((tab-obsTable)^2)))
+		}
+	}
+	
+rrmseObj <- function(obsTable){
+	function(tab){
+		sqrt((mean(((tab-obsTable)/(obsTable+2*sqrt(.Machine$double.eps)))^2)))
+		}
+	}
 
