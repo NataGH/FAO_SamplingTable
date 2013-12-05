@@ -55,7 +55,7 @@ Scenario <- read.csv("Scenario_140.csv",sep=";",nrows=nrow(muTab))
 rownames(Scenario) <- make.unique(as.character(Scenario[,1]))
 Scenario <- Scenario[,-c(1,8:9)]
 
-system.time(tab3 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,objFun=rmseObj(Scenario)))
+system.time(tab3 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,objFun=rrmseObj(Scenario)))
 # system.time(tab3 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,objFun=rrmseObj(Scenario))
 
 

@@ -27,7 +27,7 @@ setMethod("show",signature("FAOtab"),function(object){
 
 
 
-sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,controlRow=NULL,sdev=5,verbose=TRUE,objFun=function(tab){colSums(tab)[1]},fixed=c(),fixedRows=NULL,keepArgs=FALSE){
+sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,controlRow=NULL,sdev=5,verbose=TRUE,objFun=function(tab){-colSums(tab)[1]},fixed=c(),fixedRows=NULL,keepArgs=FALSE){
 
 	call <- match.call()
 	
@@ -135,7 +135,7 @@ sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,cont
         }
 
       okTab <- okTab[1:uniqueT]
-      bestTab <- okTab[[which.max(unlist(lapply(okTab,objFun)))]]
+      bestTab <- okTab[[which.min(unlist(lapply(okTab,objFun)))]]
       
       bestTab <- do.call(rbind,lapply(1:length(indZero),function(i){
       	if(indZero[i])return(rep(0,nc))
@@ -157,7 +157,7 @@ rmseObj <- function(obsTable){
 	
 rrmseObj <- function(obsTable){
 	function(tab){
-		sqrt((mean(((tab-obsTable)/(obsTable+2*sqrt(.Machine$double.eps)))^2)))
+		-sqrt((mean(((tab-obsTable)/(obsTable+2*sqrt(.Machine$double.eps)))^2)))
 		}
 	}
 
