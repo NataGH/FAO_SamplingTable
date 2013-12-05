@@ -51,9 +51,25 @@ tab2@bestTab[c(3,56,101),]
 
 
 ### now let's use the MSE to pick the best table
-Scenario <- read.csv("Scenario_140.csv",sep=";",nrows=nrow(muTab))
+muTab <- read.csv("ExpectedValues_t_Italy_2006.csv",row.names=1,sep=",")[-114,-(8:10)]
+n0<-read.csv("ExpectedValues_t_Italy_2006.csv",header=TRUE,row.names=1,sep=",")[-114,8]
+
+bounds <- array(NA,c(dim(muTab),2))
+dimnames(bounds) <- c(dimnames(muTab),list(c("Lower","Upper")))
+bounds[,,1] <- as.matrix(read.csv("LowerBounds_t_Italy_2006.csv",row.names=1,sep=','))[-114,colnames(muTab)]
+bounds[,,2] <- as.matrix(read.csv("UpperBounds_t_Italy_2006.csv",row.names=1,sep=','))[-114,colnames(muTab)]
+
+
+lowCol<-read.csv("LowerBounds_t_Italy_2006.csv",row.names=1,sep=',')[114,]
+uppCol<-read.csv("UpperBounds_t_Italy_2006.csv",row.names=1,sep=',')[114,]
+controlCol1 <- rbind(lowCol,uppCol)
+controlCol1[,ncol(controlCol1)]<- controlCol1[,ncol(controlCol1)]*c(1/5,5)
+#controlCol1[1,] <- -controlCol1[2,]
+
+
+Scenario <- read.csv("Scenario_t_Italy_2006.csv",sep=",",nrows=nrow(muTab))
 rownames(Scenario) <- make.unique(as.character(Scenario[,1]))
-Scenario <- Scenario[,-c(1,8:9)]
+Scenario <- Scenario[,-c(1,9:11)]
 
 system.time(tab3 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,objFun=rrmseObj(Scenario)))
 # system.time(tab3 <- sampleTables(n0,muTab,bounds,controlCol=controlCol1,objFun=rrmseObj(Scenario))

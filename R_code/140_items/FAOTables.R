@@ -101,7 +101,7 @@ sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,cont
 			return(rrow)
 			
 			}))
-			
+			#browser()
 		if(verbose)cat("\n")
 		#browser()
 		totCol <- colSums(sim)
@@ -157,7 +157,7 @@ rmseObj <- function(obsTable){
 	
 rrmseObj <- function(obsTable){
 	function(tab){
-		-sqrt((mean(((tab-obsTable)/(obsTable+2*sqrt(.Machine$double.eps)))^2)))
+		sqrt((mean(((tab-obsTable)/(obsTable+2*sqrt(.Machine$double.eps)))^2)))
 		}
 	}
 
