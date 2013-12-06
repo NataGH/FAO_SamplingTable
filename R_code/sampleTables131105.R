@@ -2,19 +2,41 @@ rm(list=ls())
 gc()
 
 
+setwd("C:/Users/natalia/Documents/FAO/script")
+require(msm)
+
 
 muTab <- read.csv("ExpectedValues.csv",row.names=1)
 
 n0<-read.csv("ValoriItalia.csv",header=TRUE,row.names=1)[,7]
+n0
 #n0 <- muTab[,7]
 #n0 <- muTab[,8]
 muTab <- muTab[,-(7:9)]
-
+muTab
 
 bounds <- array(NA,c(dim(muTab),2))
 dimnames(bounds) <- c(dimnames(muTab),list(c("Lower","Upper")))
-bounds[,,1] <- as.matrix(read.csv("lowerBounds.csv",row.names=1))[,-(7:9)]
-bounds[,,2] <- as.matrix(read.csv("upperBounds.csv",row.names=1))[,-(7:9)]
+bounds[,,1] <- as.matrix(read.csv("lowerBounds.csv",row.names=1,sep=';'))
+bounds[,,2] <- as.matrix(read.csv("upperBounds.csv",row.names=1,sep=';'))
+
+
+## proviamo a simulare direttamente dalla normali troncate 
+## con le nuove prior che ho definito??
+
+range(rtnorm(1000, mean=9210, sd=100, lower=9026, upper=9394))
+par(mfrow=c(2,2))
+hist(rtnorm(1000, mean=9210, sd=10, lower=9026, upper=9394))
+hist(rtnorm(1000, mean=9210, sd=100, lower=9026, upper=9394))
+hist(rtnorm(1000, mean=9210, sd=1000, lower=9026, upper=9394))
+hist(rtnorm(1000, mean=9210, sd=10000000, lower=9026, upper=9394))
+
+# fissare uno sd molto alto significa sostanzialmente simulare
+# da una uniforme discreta nell'intervallo definito dagli upper
+# e lower bounds.
+# vediamo che succede per diversi valori di sd?
+
+
 
 
 sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,controlRow=NULL){
@@ -59,7 +81,7 @@ sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,cont
 						
 						}
 				
-				if(rrow[nc]>=min(controlRow[i,]) & rrow[nc]<=max(controlRow[i,])) break
+#				if(rrow[nc]>=min(controlRow[i,]) & rrow[nc]<=max(controlRow[i,])) break
 				
 				#if(i>=5)browser()
 				#break
@@ -71,12 +93,12 @@ sampleTables <- function(n0,muTab, bounds,nIter=100,N=10000,controlCol=NULL,cont
 			}))
 		cat("\n")
 		totCol <- colSums(sim)
-		cond <- sapply(1:nc,function(j)(totCol[j]>=controlCol[1,j] & totCol[j]<=controlCol[2,j]))
-		if(all(cond)){
+#		cond <- sapply(1:nc,function(j)(totCol[j]>=controlCol[1,j] & totCol[j]<=controlCol[2,j]))
+#		if(all(cond)){
 			okTab[,,t]<-sim
 			t <- t+1
-			print(t)
-			}
+#			print(t)
+#			}
 		iter <- iter + 1
         }
         
@@ -93,12 +115,17 @@ summary(do.call(rbind,lapply(1:dim(tab[[1]])[3],function(t)tab[[1]][,6,t])))
 
 ###
 # Commenti di Luca:
-# 1. righe 29-36: come vedi uno dei problemi coi vincoli di riga é che quando abbiamo zeri strutturali dobbiamo aggiustare anche i vincoli... ma le varianze sono sempre un po' off... riusciamo a tirare fuori un buon set di priors? come vedi queste sono fuori almeno di un fattore 10 (i.e. se metto 1 invece di 10 l'algoritmo non funge....)
+# 1. righe 29-36: come vedi uno dei problemi coi vincoli di riga é 
+#    che quando abbiamo zeri strutturali dobbiamo aggiustare anche i vincoli... 
+#    ma le varianze sono sempre un po' off... riusciamo a tirare fuori un buon set di priors? 
+#    come vedi queste sono fuori almeno di un fattore 10 (i.e. se metto 1 invece di 10 l'algoritmo non funge....)
 # 2. riga 52: la TN é anche ottenibile così:
 # Z~N(0,1) and X~TN(mu,sigma) iff X = mu+sigma*|Z|
-# 3. é ancora un po' awkward come definisco le prior qua perché ho voluto tenere la struttura data dalla uniforme... ma con nuove priors posso implementare le normali...
+# 3. é ancora un po' awkward come definisco le prior qua perché ho voluto tenere la struttura data dalla uniforme... 
+# ma con nuove priors posso implementare le normali...
 
-# Davvero, qua i vincoli hanno ancora qualcosa che non va... riusciamo magari a stringere un pochetto le varianze di cella e allargare quelle di stockvar?
+# Davvero, qua i vincoli hanno ancora qualcosa che non va... riusciamo magari a stringere un pochetto le varianze 
+# di cella e allargare quelle di stockvar?
 ###
 
 
