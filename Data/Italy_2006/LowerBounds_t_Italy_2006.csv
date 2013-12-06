@@ -1,0 +1,115 @@
+ITEM,Feed,Seed,Waste,Processing,Other Util,Food,Stock Var
+Cereals,13961,729,86,814,252,8829,563
+Wheat,2090,570,63,77,10,8199,419
+Rice,30,28,1,12,9,351,45
+Barley,1615,67,2,252,0,14,-88
+Maize,9595,29,11,472,234,242,200
+Rye,17,1,0,0,0,4,-1
+Oats,333,32,7,0,0,15,-19
+Millet,10,0,0,0,0,0,0
+Sorghum,246,1,3,0,0,0,0
+Cereals Other,25,3,0,0,0,3,-3
+Starchy Roots,63,143,38,0,191,2225,-19
+Cassava,2,0,0,0,3,0,0
+Potatoes,48,143,38,0,188,2213,-19
+Sweet Potatoes,9,0,0,0,0,12,0
+Yams,0,0,0,0,0,0,0
+Roots Other,5,0,0,0,0,0,0
+Sugarcrops,22,0,48,4465,0,0,0
+Sugar Cane,0,0,0,0,0,0,0
+Sugar Beet,22,0,48,4465,0,0,0
+Sugar & Sweeteners,0,0,0,16,186,1679,539
+Sugar  Non-Centrifugal ,0,0,0,0,0,0,0
+Sugar,0,0,0,16,51,1570,532
+Sweeteners Other,0,0,0,0,135,89,7
+Honey,0,0,0,0,0,19,0
+Pulses,204,19,17,0,0,314,-5
+Beans,0,4,5,0,0,99,0
+Peas,114,1,4,0,0,76,0
+Pulses Other,90,13,9,0,0,139,-5
+Treenuts,0,0,4,0,3,466,0
+Oilcrops,226,16,32,5678,5,181,10
+Soyabeans,162,14,20,1735,0,0,0
+Groundnuts,0,0,0,10,0,17,0
+Sunflowerseed,48,1,5,420,0,0,0
+Rape and Mustardseed,0,0,2,19,5,3,3
+Cottonseed,17,0,0,153,0,0,0
+Coconuts - Incl Copra,0,0,0,0,0,22,0
+Sesameseed,0,0,1,6,0,0,0
+Palmkernels ,0,0,0,0,0,0,0
+Olives,0,0,4,3186,0,139,0
+Oilcrops Other,0,0,0,150,0,0,9
+Vegetable Oils,333,0,0,5,865,1544,82
+Soyabean Oil,333,0,0,0,3,-340,0
+Groundnut Oil,0,0,0,0,0,45,0
+Sunflowerseed Oil,0,0,0,0,86,243,0
+Rape and Mustard Oil,0,0,0,0,226,76,0
+Cottonseed Oil,0,0,0,0,26,0,0
+Palmkernel Oil,0,0,0,0,25,8,0
+Palm Oil,0,0,0,0,351,38,0
+Coconut Oil,0,0,0,0,24,35,0
+Sesameseed Oil,0,0,0,0,0,3,0
+Olive Oil,0,0,0,0,44,788,80
+Ricebran Oil ,0,0,0,0,0,0,0
+Maize Germ Oil,0,0,0,0,0,70,0
+Oilcrops Oil Other,0,0,0,5,82,10,2
+Vegetables,675,11,1278,0,0,8808,1
+Tomatoes,0,0,143,0,0,2874,0
+Onions,0,0,41,0,0,331,0
+Vegetables Other,675,11,1094,0,0,5604,1
+Fruits - Excluding Wine + (Total),0,0,730,6436,10,8541,-4
+Oranges Mandarines,0,0,67,0,0,2745,0
+Lemons Limes,0,0,18,0,0,554,0
+Grapefruit,0,0,2,0,0,53,-4
+Citrus Other,0,0,0,0,10,17,0
+Bananas,0,0,46,0,0,447,0
+Plantains,0,0,0,0,0,3,0
+Apples,0,0,206,83,0,979,0
+Pineapples,0,0,7,0,0,179,0
+Dates,0,0,0,0,0,6,0
+Grapes,0,0,199,6309,0,881,0
+Fruits Other,0,0,184,45,0,2677,0
+Stimulants,0,0,0,12,0,410,-3
+Coffee,0,0,0,0,0,321,0
+Cocoa Beans,0,0,0,12,0,82,71
+Tea,0,0,0,0,0,8,2
+Spices,0,0,0,0,0,6,-1
+Pimento,0,0,0,0,0,0,0
+Cloves,0,0,0,0,0,0,0
+Pepper,0,0,0,0,0,3,0
+Spices Other,0,0,0,0,0,3,-1
+Alcoholic Beverages,0,0,19,689,221,4052,64
+Wine,0,0,19,689,0,2376,64
+Beer,0,0,0,0,0,1624,0
+Beverages Fermented,0,0,0,0,0,1,0
+Beverages Alcoholic,0,0,0,0,50,52,0
+Alcohol Non-Food,0,0,0,0,170,0,0
+Meat,0,0,4,14,0,4969,0
+Bovine Meat,0,0,0,0,0,1363,0
+Mutton & Goat Meat,0,0,4,0,0,83,0
+Pigmeat,0,0,0,0,0,2461,0
+Poultry Meat,0,0,0,14,0,755,0
+Meat Other,0,0,0,0,0,308,0
+Offals,2,0,0,0,0,183,0
+Animal Fats,12,0,0,0,79,610,8
+Butter Ghee,0,0,0,0,0,158,8
+Cream,0,0,0,0,0,200,0
+Fats,0,0,0,0,79,251,0
+Fish Body Oil,12,0,0,0,0,0,0
+Fish Liver Oil,0,0,0,0,0,1,0
+Eggs,0,29,2,0,0,609,0
+Milk,1022,0,82,201,414,14872,21
+Fish Seafood,264,0,0,0,0,1416,0
+Freshwater Fish,0,0,0,0,0,136,0
+Demersal Fish,0,0,0,0,0,381,0
+Pelagic Fish,264,0,0,0,0,270,0
+Marine Fish Other,0,0,0,0,0,91,0
+Crustaceans,0,0,0,0,0,138,0
+Cephalopods,0,0,0,0,0,205,0
+Molluscs Other,0,0,0,0,0,195,0
+Aquatic Products Other,0,0,0,0,3,19,0
+Meat & Aquatic Mammals ,0,0,0,0,0,0,0
+Aquatic Animals,0,0,0,0,1,19,0
+Aquatic Plants,0,0,0,0,2,0,0
+Miscellaneous ,0,0,0,0,0,0,0
+Tot col,27406,1570,3863,30703,3402,87018,2101
